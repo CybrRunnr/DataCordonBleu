@@ -1,7 +1,32 @@
-﻿
+﻿@model DataCordonBleu.Models.Stuffer
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Encode Index";
 }
 
-<h1>Index</h1>
+<h1>Encode a Message</h1>
 
+@using (Html.BeginForm("Index", "Encode", FormMethod.Post)) {
+    <div class="form-group">
+        @Html.LabelFor(model => model.Message)
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Message)
+            @Html.ValidationMessageFor(model => model.Message)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password)
+        <div class="col-md-10">
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+    </div>
+    <button type="submit" class="btn btn-dark">Submit</button>
+}
+
+@if (Model != null) {
+    <span>@Model.Message</span>
+    <span>@Model.Password</span>
+} else {
+    <span>The Model is null.</span>
+}
