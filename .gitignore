@@ -338,4 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/DataCordonBleu/Data
+/DataCordonBleu/Data/*.jpg
+/DataCordonBleu/Data/*.jpeg
+/DataCordonBleu/Data/*.png
+
