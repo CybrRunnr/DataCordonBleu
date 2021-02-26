@@ -9,6 +9,7 @@ namespace DataCordonBleu.Models {
     public class Stuffer {
         private string _Message;
         private string _Password;
+        private string _FileName;
 
         [Display(Name = "Message")]
         [Required]
@@ -22,6 +23,11 @@ namespace DataCordonBleu.Models {
         public string Password {
             get { return _Password; }
             set { _Password = value; }
+        }
+
+        public string FileName {
+            get { return _FileName; }
+            set { _FileName = value; }
         }
 
 

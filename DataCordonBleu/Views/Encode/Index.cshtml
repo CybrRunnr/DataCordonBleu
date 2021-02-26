@@ -32,9 +32,15 @@
     }
 </div>
 
-@if (Model != null) {
+@*@if (Model != null) {
     <span>@Model.Message</span>
     <span>@Model.Password</span>
 } else {
     <span>The Model is null.</span>
+}*@
+
+@if (Model != null && Model.FileName != null) {
+    <img src="@Model.FileName" />
+} else {
+    <span>The Model.FileName is null.</span>
 }
