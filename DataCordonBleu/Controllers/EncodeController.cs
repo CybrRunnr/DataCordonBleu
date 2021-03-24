@@ -40,7 +40,7 @@ namespace DataCordonBleu.Controllers {
                 // Path.GetExtension: https://docs.microsoft.com/en-us/dotnet/api/system.io.path.getextension?view=net-5.0
                 string extension = Path.GetExtension(file.FileName);
                 string newFilePath = getFilePath(newFileName, extension);
-                TempData["FilePath"] = newFileName;
+                TempData["FilePath"] = newFilePath;
                 using (FileStream str = new FileStream(newFilePath, FileMode.Create)) {
                     await file.CopyToAsync(str);
                 }
