@@ -342,3 +342,10 @@ healthchecksdb
 /DataCordonBleu/Data/*.jpeg
 /DataCordonBleu/Data/*.png
 
+/DataCordonBleu-Framework/Uploads/*.jpg
+/DataCordonBleu-Framework/Uploads/*.jpeg
+/DataCordonBleu-Framework/Uploads/*.png
+
+/DataCordonBleu-Framework/Exports/*.jpg
+/DataCordonBleu-Framework/Exports/*.jpeg
+/DataCordonBleu-Framework/Exports/*.png
