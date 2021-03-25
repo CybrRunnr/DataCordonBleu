@@ -24,6 +24,10 @@ namespace DataCordonBleu_Framework.Controllers {
             return View();
         }
 
+        public ActionResult Privacy() {
+            return View();
+        }
+
         public ActionResult Testing() {
             string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.jpg";
             string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";

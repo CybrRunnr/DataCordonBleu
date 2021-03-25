@@ -1,0 +1,47 @@
+﻿@model DataCordonBleu.Models.Stuffer
+@{
+    ViewData["Title"] = "Encode Index";
+}
+
+<h1>Encode a Message</h1>
+<div>
+    @using (Html.BeginForm("Index", "Encode", FormMethod.Post)) {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Message)
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Message)
+                @Html.ValidationMessageFor(model => model.Message)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>*@
+        <button type="submit" class="btn btn-dark">Submit</button>
+    }
+</div>
+
+<div>
+    @using (Html.BeginForm("FromFile", "Encode", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+        @Html.TextBox("file", "", new { type = "file" })
+        @*<input type="file" id="fileImport" name="file" />*@
+        <input type="submit" value="Upload" />
+    }
+</div>
+
+@*@if (Model != null) {
+        <span>@Model.Message</span>
+        <span>@Model.Password</span>
+    } else {
+        <span>The Model is null.</span>
+    }*@
+
+@if (Model != null && Model.FilePath != null) {
+    <img class="img" src="@Model.FilePath" />
+} else {
+    <span>The Model.FileName is null.</span>
+}
