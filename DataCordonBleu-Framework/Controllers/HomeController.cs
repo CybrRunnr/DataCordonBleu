@@ -32,7 +32,9 @@ namespace DataCordonBleu_Framework.Controllers {
             string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.jpg";
             string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
             Bitmap bmp = new Bitmap(imgPath);
-
+            
+            int testNum = 11;
+            
             //Source: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bitmap?view=netcore-3.1
             //Gets X coordinate
             for (int x = 0; x < bmp.Width; x++) {
