@@ -34,10 +34,11 @@ namespace DataCordonBleu_Framework.Controllers {
             string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
             Bitmap bmp = new Bitmap(imgPath);
 
-            int testNum = 11;
+            int testNum = 25;
             int shift = 2;
 
-            ViewBag.TestList = Shifter.IntToBitBlocks(testNum, shift);
+            int[] TestList = Shifter.IntToBitBlocks(testNum, shift);
+            int backwards = Shifter.BinaryArrayToInt(TestList);
 
             //Source: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bitmap?view=netcore-3.1
             //Gets X coordinate
