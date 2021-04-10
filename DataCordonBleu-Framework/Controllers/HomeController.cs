@@ -37,12 +37,12 @@ namespace DataCordonBleu_Framework.Controllers {
             int testNum = 25;
             int block = 2;
 
-            string input = "Testing String";
+            string input = "Testing String !";
             int[][] msgArray = BitBlock.MessageToBinary(block, input);
             string output = BitBlock.BinaryToMessage(msgArray);
 
-            int[] foo = msgArray[0];
-            int backwards = BitBlock.BinaryArrayToInt(msgArray[0]);
+            //int[] foo = msgArray[0];
+            //int backwards = BitBlock.BinaryArrayToInt(msgArray[0]);
 
 
             //Source: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bitmap?view=netcore-3.1

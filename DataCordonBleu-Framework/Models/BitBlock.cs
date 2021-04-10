@@ -22,26 +22,6 @@ namespace DataCordonBleu_Framework.Models {
             return retList.ToArray();
         }
 
-        /// <summary>
-        /// Converts an integer into a list of integers corresponding to the binary value of the given number.
-        /// </summary>
-        /// <param name="num">Number to convert</param>
-        /// <param name="blockSize">Size of binary block</param>
-        /// <returns>Array of integers represent the binary at that block</returns>
-        public static int[] IntToBitBlocks(int num, int blockSize) {
-            List<int> numList = new List<int>();
-            int remainder;
-            do {
-                int mod = GetMod(num, blockSize);
-                remainder = num - mod;
-                numList.Add(mod);
-                num = GetShift(num, blockSize);
-            } while (remainder != 0);
-            numList.Reverse();
-
-            return numList.ToArray();
-        }
-
         public static string BinaryToMessage(int[][] jag) {
             string retString = "";
             foreach (int[] arr in jag) {
@@ -52,11 +32,28 @@ namespace DataCordonBleu_Framework.Models {
         }
 
         /// <summary>
-        /// 
+        /// Converts an integer into a list of integers corresponding to the binary value of the given number.
         /// </summary>
-        /// <param name="arr"></param>
-        /// <returns></returns>
-        public static int BinaryArrayToInt(int[] arr) {
+        /// <param name="num">Number to convert</param>
+        /// <param name="blockSize">Size of binary block</param>
+        /// <returns>Array of integers represent the binary at that block</returns>
+        private static int[] IntToBitBlocks(int num, int blockSize) {
+            List<int> numList = new List<int>();
+            int remainder;
+            do {
+                int mod = GetMod(num, blockSize);
+                remainder = num - mod;
+                numList.Add(mod);
+                num = GetShift(num, blockSize);
+            } while (remainder != 0);
+            numList.Reverse();
+            while (numList.Count < 4) {
+                numList.Insert(0, 0);
+            }
+            return numList.ToArray();
+        }
+
+        private static int BinaryArrayToInt(int[] arr) {
             int retNum = 0;
             int arrayLength = arr.Length;
             for (int ndx = 0; ndx < arrayLength; ndx++) {
