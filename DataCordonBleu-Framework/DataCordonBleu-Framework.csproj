@@ -128,7 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Hasher.cs" />
-    <Compile Include="Models\Shifter.cs" />
+    <Compile Include="Models\BitBlock.cs" />
     <Compile Include="Models\Stuffer.cs" />
     <Compile Include="Models\Unstuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -35,10 +35,15 @@ namespace DataCordonBleu_Framework.Controllers {
             Bitmap bmp = new Bitmap(imgPath);
 
             int testNum = 25;
-            int shift = 2;
+            int block = 2;
 
-            int[] TestList = Shifter.IntToBitBlocks(testNum, shift);
-            int backwards = Shifter.BinaryArrayToInt(TestList);
+            string input = "Testing String";
+            int[][] msgArray = BitBlock.MessageToBinary(block, input);
+            string output = BitBlock.BinaryToMessage(msgArray);
+
+            int[] foo = msgArray[0];
+            int backwards = BitBlock.BinaryArrayToInt(msgArray[0]);
+
 
             //Source: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bitmap?view=netcore-3.1
             //Gets X coordinate
