@@ -12,7 +12,7 @@ namespace DataCordonBleu_Framework.Models {
         /// <param name="blockSize">Size of binary block</param>
         /// <param name="message">Message to be converted</param>
         /// <returns>Jagged array of integers where each array of integers represents the binary at a charter in the message</returns>
-        public static int[][] MessageToBinary(int blockSize, string message) {
+        public static int[][] MessageToBinary(string message, int blockSize) {
             //make arrays the same size always
             int[] msgInAscii = GetASCIIArr(message);
             List<int[]> retList = new List<int[]>();
@@ -22,13 +22,19 @@ namespace DataCordonBleu_Framework.Models {
             return retList.ToArray();
         }
 
-        public static string BinaryToMessage(int[][] jag) {
+        public static string BinaryToMessage(int[][] jag, int blockSize) {
             string retString = "";
             foreach (int[] arr in jag) {
-                char temp = (char)BinaryArrayToInt(arr);
+                char temp = (char)BinaryArrayToInt(arr, blockSize);
                 retString += temp;
             }
             return retString;
+        }
+
+        public static int MakeStorageSpace(int num, int BlockSize) {
+            int retNum = RightShift(num, BlockSize);
+            retNum = LeftShift(retNum, BlockSize);
+            return retNum;
         }
 
         /// <summary>
@@ -44,7 +50,7 @@ namespace DataCordonBleu_Framework.Models {
                 int mod = GetMod(num, blockSize);
                 remainder = num - mod;
                 numList.Add(mod);
-                num = GetShift(num, blockSize);
+                num = RightShift(num, blockSize);
             } while (remainder != 0);
             numList.Reverse();
             while (numList.Count < 4) {
@@ -53,25 +59,30 @@ namespace DataCordonBleu_Framework.Models {
             return numList.ToArray();
         }
 
-        private static int BinaryArrayToInt(int[] arr) {
+        private static int BinaryArrayToInt(int[] arr, int blockSize) {
             int retNum = 0;
             int arrayLength = arr.Length;
             for (int ndx = 0; ndx < arrayLength; ndx++) {
                 int valInArr = arr[ndx];
-                int pwr = (int)Math.Pow(4, arrayLength - ndx - 1);
+                int pwr = (int)Math.Pow(Math.Pow(2, blockSize), arrayLength - ndx - 1);
                 int numToBeAdded = (pwr * valInArr);
                 retNum += numToBeAdded;
             }
             return retNum;
         }
 
-        private static int GetMod(int num, int blockSize) {
+        public static int GetMod(int num, int blockSize) {
             int ret = (byte)(num % Math.Pow(2, blockSize));
             return ret;
         }
 
-        private static int GetShift(int num, int shift) {
+        public static int RightShift(int num, int shift) {
             int ret = num >> shift;
+            return ret;
+        }
+
+        public static int LeftShift(int num, int shift) {
+            int ret = num << shift;
             return ret;
         }
 

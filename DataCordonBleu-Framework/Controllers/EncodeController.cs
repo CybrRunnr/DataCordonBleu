@@ -8,7 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using DataCordonBleu.Models;
+using DataCordonBleu_Framework.Models;
 
 namespace DataCordonBleu_Framework.Controllers {
     public class EncodeController : Controller {

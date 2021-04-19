@@ -32,33 +32,36 @@ namespace DataCordonBleu_Framework.Controllers {
         public ActionResult Testing() {
             string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.jpg";
             string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
-            Bitmap bmp = new Bitmap(imgPath);
 
-            int testNum = 25;
+            Bitmap bmp = new Bitmap(imgPath);
+            string input = "Testing String !";
             int block = 2;
 
-            string input = "Testing String !";
-            int[][] msgArray = BitBlock.MessageToBinary(block, input);
-            string output = BitBlock.BinaryToMessage(msgArray);
+            Stuffer stfr = new Stuffer(input, bmp, block);
+            stfr.InsertMessage();
+            stfr.ImageBMP.Save(savePath, ImageFormat.Jpeg);
+
+            //int[][] msgArray = BitBlock.MessageToBinary(input, block);
+            //string output = BitBlock.BinaryToMessage(msgArray, block);
+
+            return View();
+
 
             //int[] foo = msgArray[0];
             //int backwards = BitBlock.BinaryArrayToInt(msgArray[0]);
 
-
             //Source: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bitmap?view=netcore-3.1
             //Gets X coordinate
-            for (int x = 0; x < bmp.Width; x++) {
-                //Gets X coordinate
-                for (int y = 0; y < bmp.Height; y++) {
-                    //Color: Struct that hold the ARGB values of a pixel
-                    Color pixelColor = bmp.GetPixel(x, y);
-                    Color newColor = Color.FromArgb(0, pixelColor.G, pixelColor.B);
-                    bmp.SetPixel(x, y, newColor);
-                }
-            }
-            bmp.Save(savePath, ImageFormat.Jpeg);
-
-            return View();
+            //for (int x = 0; x < bmp.Width; x++) {
+            //    //Gets X coordinate
+            //    for (int y = 0; y < bmp.Height; y++) {
+            //        //Color: Struct that hold the ARGB values of a pixel
+            //        Color pixelColor = bmp.GetPixel(x, y);
+            //        Color newColor = Color.FromArgb(0, pixelColor.G, pixelColor.B);
+            //        bmp.SetPixel(x, y, newColor);
+            //    }
+            //}
+            //bmp.Save(savePath, ImageFormat.Jpeg);
         }
     }
 }

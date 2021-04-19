@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 //using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
-namespace DataCordonBleu.Models {
+namespace DataCordonBleu_Framework.Models {
     public static class Hasher {
 
         ////https://monkelite.com/how-to-hash-password-in-asp-net-core/
