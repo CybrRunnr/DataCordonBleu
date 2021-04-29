@@ -28,8 +28,17 @@ namespace DataCordonBleu_Framework.Controllers {
 
         [HttpPost]
         public ActionResult Index(Stuffer stf) {
-            if (ModelState.IsValid) {
-            }
+            Stuffer unstf = new Stuffer();
+            //if (ModelState.IsValid) {
+            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.jpg";
+            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
+            Bitmap bmpUpload = new Bitmap(imgPath);
+            stf.ImageBMP = bmpUpload;
+            stf.InsertMessage();
+
+            unstf.ImageBMP = new Bitmap(savePath);
+            unstf.ExtractMessage();
+            //}
             return View(stf);
         }
 

@@ -34,12 +34,20 @@ namespace DataCordonBleu_Framework.Controllers {
             string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
 
             Bitmap bmp = new Bitmap(imgPath);
-            string input = "Testing String !";
+            string input = "Can I read this?";
             int block = 2;
 
             Stuffer stfr = new Stuffer(input, bmp, block);
             stfr.InsertMessage();
-            stfr.ImageBMP.Save(savePath, ImageFormat.Jpeg);
+            //stfr.ImageBMP.Save(savePath, ImageFormat.Jpeg);
+
+            Bitmap temp = stfr.ImageBMP;
+
+            Stuffer unstf = new Stuffer();
+            //unstf.ImageBMP = new Bitmap(savePath);
+            unstf.ImageBMP = temp;
+            unstf.ExtractMessage();
+
 
             //int[][] msgArray = BitBlock.MessageToBinary(input, block);
             //string output = BitBlock.BinaryToMessage(msgArray, block);

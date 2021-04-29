@@ -78,6 +78,9 @@ namespace DataCordonBleu_Framework.Models {
                 }
 
             }
+            set {
+                _MessageArray = value;
+            }
         }
         #endregion
 
@@ -114,6 +117,21 @@ namespace DataCordonBleu_Framework.Models {
                 }
             }
         }
+
+        public void ExtractMessage() {
+            List<int> messNums = new List<int>();
+            for (int x = 0; x < ImageBMP.Width; x++) {
+                for (int y = 0; y < ImageBMP.Height; y++) {
+                    Color pixelColor = ImageBMP.GetPixel(x, y);
+                    messNums.Add(BitBlock.GetMod(pixelColor.R, BlockSize));
+                    messNums.Add(BitBlock.GetMod(pixelColor.G, BlockSize));
+                    messNums.Add(BitBlock.GetMod(pixelColor.B, BlockSize));
+                }
+
+            }
+            MessageArray = ToTwoDemArray(messNums.ToArray());
+            Message = BitBlock.BinaryToMessage(MessageArray, BlockSize);
+        }
         #endregion
 
         #region Private Methods
@@ -124,6 +142,19 @@ namespace DataCordonBleu_Framework.Models {
                 for (int i = 0; i < arrForOneChar.Length; i++) {
                     retList.Add(arrForOneChar[i]);
                 }
+            }
+            return retList.ToArray();
+        }
+
+        private int[][] ToTwoDemArray(int[] oneD) {
+            List<int[]> retList = new List<int[]>();
+            for (int ndx = 0; ndx < oneD.Length; ndx += 4) {
+                IEnumerable<int> tempList = oneD.Skip(ndx).Take(4);
+                int[] tempArr = tempList.ToArray();
+                if (tempArr.Sum() == 0) {
+                    return retList.ToArray();
+                }
+                retList.Add(tempArr);
             }
             return retList.ToArray();
         }

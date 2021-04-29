@@ -1,4 +1,4 @@
-﻿@model DataCordonBleu.Models.Stuffer
+﻿@model DataCordonBleu_Framework.Models.Stuffer
 @{
     ViewData["Title"] = "Encode Index";
 }
@@ -6,11 +6,18 @@
 <h1>Encode a Message</h1>
 <div>
     @using (Html.BeginForm("Index", "Encode", FormMethod.Post)) {
-        <div class="form-group">
+        <div>
             @Html.LabelFor(model => model.Message)
-            <div class="col-md-10">
+            <div>
                 @Html.TextBoxFor(model => model.Message)
                 @Html.ValidationMessageFor(model => model.Message)
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.BlockSize)
+            <div>
+                @Html.TextBoxFor(model => model.BlockSize)
+                @Html.ValidationMessageFor(model => model.BlockSize)
             </div>
         </div>
 
@@ -21,8 +28,12 @@
                     @Html.ValidationMessageFor(model => model.Password)
                 </div>
             </div>*@
-        <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="submit">Submit</button>
     }
+</div>
+
+<div>
+    <span>The message is: @Model.Message</span>
 </div>
 
 <div>
