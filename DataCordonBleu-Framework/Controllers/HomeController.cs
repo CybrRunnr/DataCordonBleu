@@ -30,8 +30,8 @@ namespace DataCordonBleu_Framework.Controllers {
         }
 
         public ActionResult Testing() {
-            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.jpg";
-            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
+            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.png";
+            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.png";
 
             Bitmap bmp = new Bitmap(imgPath);
             string input = "Can I read this?";
@@ -39,13 +39,13 @@ namespace DataCordonBleu_Framework.Controllers {
 
             Stuffer stfr = new Stuffer(input, bmp, block);
             stfr.InsertMessage();
-            //stfr.ImageBMP.Save(savePath, ImageFormat.Jpeg);
+            stfr.ImageBMP.Save(savePath, ImageFormat.Png);
 
             Bitmap temp = stfr.ImageBMP;
 
             Stuffer unstf = new Stuffer();
-            //unstf.ImageBMP = new Bitmap(savePath);
-            unstf.ImageBMP = temp;
+            unstf.ImageBMP = new Bitmap(savePath);
+            //unstf.ImageBMP = temp;
             unstf.ExtractMessage();
 
 
