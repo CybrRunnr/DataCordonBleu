@@ -30,16 +30,18 @@ namespace DataCordonBleu_Framework.Controllers {
         public ActionResult Index(Stuffer stf) {
             Stuffer unstf = new Stuffer();
             //if (ModelState.IsValid) {
-            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.jpg";
-            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
+            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.png";
+            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.png";
             Bitmap bmpUpload = new Bitmap(imgPath);
             stf.ImageBMP = bmpUpload;
             stf.InsertMessage();
 
-            unstf.ImageBMP = new Bitmap(savePath);
+            //stf.ImageBMP.Save(savePath, ImageFormat.Png);
+            unstf.BlockSize = stf.BlockSize;
+            unstf.ImageBMP = stf.ImageBMP; //new Bitmap(savePath);
             unstf.ExtractMessage();
             //}
-            return View(stf);
+            return View(unstf);
         }
 
         [HttpPost]

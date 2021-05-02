@@ -1,6 +1,6 @@
 ﻿@model DataCordonBleu_Framework.Models.Stuffer
 @{
-    ViewData["Title"] = "Encode Index";
+    ViewData["Title"] = "Encode";
 }
 
 <h1>Encode a Message</h1>
@@ -9,7 +9,7 @@
         <div>
             @Html.LabelFor(model => model.Message)
             <div>
-                @Html.TextBoxFor(model => model.Message)
+                @Html.TextAreaFor(model => model.Message)
                 @Html.ValidationMessageFor(model => model.Message)
             </div>
         </div>
@@ -32,9 +32,6 @@
     }
 </div>
 
-<div>
-    <span>The message is: @Model.Message</span>
-</div>
 
 <div>
     @using (Html.BeginForm("FromFile", "Encode", FormMethod.Post, new { enctype = "multipart/form-data" })) {
@@ -44,6 +41,9 @@
     }
 </div>
 
+<div>
+    <span><b>When decoded the message will read:</b> @Model.Message</span>
+</div>
 @*@if (Model != null) {
         <span>@Model.Message</span>
         <span>@Model.Password</span>
@@ -51,6 +51,9 @@
         <span>The Model is null.</span>
     }*@
 
+
+
+<h3>Testing stuff to be removed</h3>
 @if (Model != null && Model.FilePath != null) {
     <img class="img" src="@Model.FilePath" />
 } else {

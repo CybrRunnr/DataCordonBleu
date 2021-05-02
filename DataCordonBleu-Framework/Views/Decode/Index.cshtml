@@ -1,21 +1,33 @@
-﻿@model DataCordonBleu.Models.Unstuffer
+﻿@model DataCordonBleu_Framework.Models.Stuffer
 @{
-    ViewData["Title"] = "Decode Index";
+    ViewData["Title"] = "Decode";
 }
 
 <h1>Decode a Message</h1>
 
-@using (Html.BeginForm("Index", "Decode", FormMethod.Post)) {
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password)
-        <div class="col-md-10">
-            @Html.PasswordFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
+<div>
+    @using (Html.BeginForm("Index", "Decode", FormMethod.Post)) {
+        <div>
+            @Html.LabelFor(model => model.BlockSize)
+            <div>
+                @Html.TextBoxFor(model => model.BlockSize)
+                @Html.ValidationMessageFor(model => model.BlockSize)
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="submit">Decode</button>
 
-}
+    }
+</div>
+
+<div>
+    @using (Html.BeginForm("FromFile", "Decode", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+        @Html.TextBox("file", "", new { type = "file" })
+        @*<input type="file" id="fileImport" name="file" />*@
+        <input type="submit" value="Upload" />
+    }
+</div>
+
+<h3>Testing stuff to be removed</h3>
 
 @if (Model != null) {
     <span>@Model.Password</span>
