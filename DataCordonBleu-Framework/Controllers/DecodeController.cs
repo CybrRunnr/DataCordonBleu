@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DataCordonBleu.Models;
+using DataCordonBleu_Framework.Models;
 
 namespace DataCordonBleu_Framework.Controllers {
     public class DecodeController : Controller {
@@ -12,7 +12,7 @@ namespace DataCordonBleu_Framework.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Index(Unstuffer unstf) {
+        public ActionResult Index(Stuffer unstf) {
             if (ModelState.IsValid) {
 
             }

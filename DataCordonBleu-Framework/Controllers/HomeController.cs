@@ -28,8 +28,8 @@ namespace DataCordonBleu_Framework.Controllers {
         }
 
         public ActionResult Testing() {
-            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.png";
-            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.png";
+            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.jpg";
+            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.jpg";
 
             Bitmap bmp = new Bitmap(imgPath);
             string input = "Can I read this?";
@@ -37,7 +37,15 @@ namespace DataCordonBleu_Framework.Controllers {
 
             Stuffer stfr = new Stuffer(input, bmp, block);
             stfr.InsertMessage();
-            stfr.ImageBMP.Save(savePath, ImageFormat.Png);
+
+            //Source: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.encoderparameter?redirectedfrom=MSDN&view=net-5.0
+            //Source: https://stackoverflow.com/questions/1484759/quality-of-a-saved-jpg-in-c-sharp
+            ImageCodecInfo encoder = ImageCodecInfo.GetImageEncoders().First(c => c.FormatID == ImageFormat.Jpeg.Guid);
+            EncoderParameters jpegParams = new EncoderParameters(1);
+            //
+            jpegParams.Param[0] = new EncoderParameter(Encoder.Quality, 100);
+
+            stfr.ImageBMP.Save(savePath, encoder, jpegParams);
 
             Bitmap temp = stfr.ImageBMP;
 

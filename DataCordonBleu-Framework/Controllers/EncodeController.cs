@@ -26,27 +26,27 @@ namespace DataCordonBleu_Framework.Controllers {
             return View(stf);
         }
 
-        [HttpPost]
-        public ActionResult Index(Stuffer stf) {
-            Stuffer unstf = new Stuffer();
-            //if (ModelState.IsValid) {
-            string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.png";
-            string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.png";
-            Bitmap bmpUpload = new Bitmap(imgPath);
-            stf.ImageBMP = bmpUpload;
-            stf.InsertMessage();
+        //[HttpPost]
+        //public ActionResult Index(Stuffer stf) {
+        //    Stuffer unstf = new Stuffer();
+        //    //if (ModelState.IsValid) {
+        //    string imgPath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Uploads\test.png";
+        //    string savePath = @"C:\Web\DataCordonBleu\DataCordonBleu-Framework\Exports\test.png";
+        //    Bitmap bmpUpload = new Bitmap(imgPath);
+        //    stf.ImageBMP = bmpUpload;
+        //    stf.InsertMessage();
 
-            //stf.ImageBMP.Save(savePath, ImageFormat.Png);
-            unstf.BlockSize = stf.BlockSize;
-            unstf.ImageBMP = stf.ImageBMP; //new Bitmap(savePath);
-            unstf.ExtractMessage();
-            //}
-            return View(unstf);
-        }
+        //    //stf.ImageBMP.Save(savePath, ImageFormat.Png);
+        //    unstf.BlockSize = stf.BlockSize;
+        //    unstf.ImageBMP = stf.ImageBMP; //new Bitmap(savePath);
+        //    unstf.ExtractMessage();
+        //    //}
+        //    return View(unstf);
+        //}
 
         [HttpPost]
         //Source: https://www.c-sharpcorner.com/article/upload-files-in-asp-net-mvc-5/
-        public ActionResult FromFile(HttpPostedFile file) {
+        public ActionResult FromFile(HttpPostedFileBase file, Stuffer stf) {
             try {
                 if (file.ContentLength > 0) {
                     string newFileName = Hasher.GetRandKey();

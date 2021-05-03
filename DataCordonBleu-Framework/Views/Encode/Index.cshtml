@@ -4,8 +4,18 @@
 }
 
 <h1>Encode a Message</h1>
+
 <div>
-    @using (Html.BeginForm("Index", "Encode", FormMethod.Post)) {
+    <span><b>Select an image to encode a message into</b></span>
+    @using (Html.BeginForm("FromFile", "Encode", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+        @Html.TextBox("file", "", new { type = "file" })
+        @*<input type="file" id="fileImport" name="file" />*@
+        @*<input type="submit" value="Upload" />*@
+    @*}
+</div>
+
+<div>
+    @using (Html.BeginForm("Index", "Encode", FormMethod.Post)) {*@
         <div>
             @Html.LabelFor(model => model.Message)
             <div>
@@ -33,13 +43,6 @@
 </div>
 
 
-<div>
-    @using (Html.BeginForm("FromFile", "Encode", FormMethod.Post, new { enctype = "multipart/form-data" })) {
-        @Html.TextBox("file", "", new { type = "file" })
-        @*<input type="file" id="fileImport" name="file" />*@
-        <input type="submit" value="Upload" />
-    }
-</div>
 
 <div>
     <span><b>When decoded the message will read:</b> @Model.Message</span>
