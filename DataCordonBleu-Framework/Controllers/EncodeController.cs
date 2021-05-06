@@ -22,10 +22,15 @@ namespace DataCordonBleu_Framework.Controllers {
             Stuffer stf = (Stuffer)TempData["stf"];
             if (stf != null) {
                 stf.InsertMessage();
-                string path = Path.Combine(Server.MapPath("~/Exports"),stf.FileName + ".png");
+
+                //Stuffer testing = new Stuffer();
+                //testing.ImageBMP = stf.ImageBMP;
+
+                //testing.ExtractMessage();
+
+                string path = Path.Combine(Server.MapPath("~/Exports"), stf.FileName + ".png");
                 try {
                     stf.ImageBMP.Save(path, ImageFormat.Png);
-
                 } catch (Exception) {
 
                     throw;

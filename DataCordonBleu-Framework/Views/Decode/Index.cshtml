@@ -9,12 +9,6 @@
     @using (Html.BeginForm("FromFile", "Decode", FormMethod.Post, new { enctype = "multipart/form-data" })) {
         @Html.TextBox("file", "", new { type = "file" })
         @*<input type="file" id="fileImport" name="file" />*@
-        <input type="submit" value="Upload" />
-    }
-</div>
-
-<div>
-    @using (Html.BeginForm("Index", "Decode", FormMethod.Post)) {
         <div>
             <span><b>Important:</b> The Block Size used to decode the message must be the same as the Block Size used to encode it.</span>
             @Html.LabelFor(model => model.BlockSize)

@@ -21,9 +21,6 @@ namespace DataCordonBleu_Framework.Models {
         private int[][] _MessageArray;
         #endregion
 
-
-
-
         #region Constructors
         public Stuffer() { }
 
@@ -130,6 +127,9 @@ namespace DataCordonBleu_Framework.Models {
             }
         }
 
+        /// <summary>
+        /// Decodes message in image using the ImageBMP.
+        /// </summary>
         public void ExtractMessage() {
             List<int> messNums = new List<int>();
             for (int x = 0; x < ImageBMP.Width; x++) {
@@ -142,7 +142,8 @@ namespace DataCordonBleu_Framework.Models {
 
             }
             MessageArray = ToTwoDemArray(messNums.ToArray());
-            Message = BitBlock.BinaryToMessage(MessageArray, BlockSize);
+            string temp = BitBlock.BinaryToMessage(MessageArray, BlockSize);
+            Message = temp;
         }
         #endregion
 
