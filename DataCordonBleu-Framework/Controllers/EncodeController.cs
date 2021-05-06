@@ -19,9 +19,17 @@ namespace DataCordonBleu_Framework.Controllers {
         //}
 
         public ActionResult Index() {
-            Stuffer stf = new Stuffer();
-            if (TempData["FilePath"] != null) {
-                stf.FilePath = TempData["FilePath"].ToString();
+            Stuffer stf = (Stuffer)TempData["stf"];
+            if (stf != null) {
+                stf.InsertMessage();
+                string path = Path.Combine(Server.MapPath("~/Exports"),stf.FileName + ".png");
+                try {
+                    stf.ImageBMP.Save(path, ImageFormat.Png);
+
+                } catch (Exception) {
+
+                    throw;
+                }
             }
             return View(stf);
         }
@@ -49,12 +57,15 @@ namespace DataCordonBleu_Framework.Controllers {
         public ActionResult FromFile(HttpPostedFileBase file, Stuffer stf) {
             try {
                 if (file.ContentLength > 0) {
-                    string newFileName = Hasher.GetRandKey();
+                    string newFileName = Hasher.GetRandKey().ToUpper();
+                    stf.FileName = newFileName;
                     // Path.GetExtension: https://docs.microsoft.com/en-us/dotnet/api/system.io.path.getextension?view=net-5.0
-                    string extension = Path.GetExtension(file.FileName);
-                    string newFilePath = getFilePath(newFileName, extension);
-                    TempData["FilePath"] = newFilePath;
-                    file.SaveAs(newFilePath);
+                    //string extension = Path.GetExtension(file.FileName);
+                    string newFilePath = getFilePath(stf.FileName);
+                    stf.FilePath = newFilePath;
+                    file.SaveAs(stf.FilePath);
+                    stf.ImageBMP = new Bitmap(stf.FilePath);
+                    TempData["stf"] = stf;
                 }
                 ViewBag.Message = "File uploaded successful";
                 return RedirectToAction("Index");
@@ -81,10 +92,11 @@ namespace DataCordonBleu_Framework.Controllers {
         //    return RedirectToAction("Index");
         //}
 
-        private string getFilePath(string fileName, string extension) {
+        private string getFilePath(string fileName) {
             fileName = fileName.ToUpper();
+            fileName = fileName + ".png";
             string folder = Server.MapPath("~/Uploads"); // = (_HostingEnvironment.ContentRootPath + @"\Data");
-            string newFilePath = Path.Combine(folder, fileName, extension);
+            string newFilePath = Path.Combine(folder, fileName);
             //string newFilePath = dataFolder + @"\" + fileName + extension;
             return newFilePath;
         }

@@ -14,11 +14,15 @@ namespace DataCordonBleu_Framework.Models {
         #region Private Properties
         private string _Message;
         private string _Password;
+        private string _FileName;
         private string _FilePath;
         private int _BlockSize = 2;
         private Bitmap _ImageBMP;
         private int[][] _MessageArray;
         #endregion
+
+
+
 
         #region Constructors
         public Stuffer() { }
@@ -53,6 +57,11 @@ namespace DataCordonBleu_Framework.Models {
             set { _Password = value; }
         }
 
+        public string FileName {
+            get { return _FileName; }
+            set { _FileName = value; }
+        }
+
         public string FilePath {
             get { return _FilePath; }
             set { _FilePath = value; }
@@ -85,6 +94,9 @@ namespace DataCordonBleu_Framework.Models {
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Encodes message into an image using the MessageArray and the ImageBMP properties as inputs.
+        /// </summary>
         public void InsertMessage() {
             //int[] colorArr = GetArrayOfColors();
             int count = 0;

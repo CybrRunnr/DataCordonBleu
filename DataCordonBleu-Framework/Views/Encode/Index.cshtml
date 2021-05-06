@@ -11,11 +11,11 @@
         @Html.TextBox("file", "", new { type = "file" })
         @*<input type="file" id="fileImport" name="file" />*@
         @*<input type="submit" value="Upload" />*@
-    @*}
-</div>
+        @*}
+            </div>
 
-<div>
-    @using (Html.BeginForm("Index", "Encode", FormMethod.Post)) {*@
+            <div>
+                @using (Html.BeginForm("Index", "Encode", FormMethod.Post)) {*@
         <div>
             @Html.LabelFor(model => model.Message)
             <div>
@@ -44,15 +44,14 @@
 
 
 
-<div>
-    <span><b>When decoded the message will read:</b> @Model.Message</span>
-</div>
-@*@if (Model != null) {
-        <span>@Model.Message</span>
-        <span>@Model.Password</span>
-    } else {
-        <span>The Model is null.</span>
-    }*@
+@if (Model != null) {
+    <div>
+        <span><b>When decoded the message will read:</b> @Model.Message</span>
+    </div>
+
+    @*<span>@Model.Message</span>
+    <span>@Model.Password</span>*@
+}
 
 
 
