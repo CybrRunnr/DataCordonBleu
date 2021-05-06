@@ -22,18 +22,13 @@ namespace DataCordonBleu_Framework.Controllers {
         public ActionResult FromFile(HttpPostedFileBase file, Stuffer unstf) {
             try {
                 if (file.ContentLength > 0) {
-                    //string newFileName = Hasher.GetRandKey().ToUpper();
-                    //unstf.FileName = newFileName;
-                    //string newFilePath = getFilePath(unstf.FileName);
-                    //unstf.FilePath = newFilePath;
-                    //file.SaveAs(unstf.FilePath);
                     Image temp = Image.FromStream(file.InputStream);
-
                     unstf.ImageBMP = new Bitmap(temp);
-                    TempData["unstf"] = unstf;
+                    unstf.ExtractMessage();
+                    //TempData["unstf"] = unstf;
                 }
                 ViewBag.Message = "File uploaded successful";
-                return RedirectToAction("Index");
+                return View("Success", unstf);
             } catch {
                 ViewBag.Message = "File uploaded failed";
                 return RedirectToAction("Index");
@@ -43,7 +38,7 @@ namespace DataCordonBleu_Framework.Controllers {
         private string getFilePath(string fileName) {
             fileName = fileName.ToUpper();
             fileName = fileName + ".png";
-            string folder = Server.MapPath("~/Uploads"); // = (_HostingEnvironment.ContentRootPath + @"\Data");
+            string folder = Server.MapPath("~/Uploads");
             string newFilePath = Path.Combine(folder, fileName);
             //string newFilePath = dataFolder + @"\" + fileName + extension;
             return newFilePath;
