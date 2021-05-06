@@ -65,13 +65,10 @@ namespace DataCordonBleu_Framework.Controllers {
             try {
                 if (file.ContentLength > 0 && file != null) {
                     //Save the original img to uploads
-                    string newFileName = Hasher.GetRandKey().ToUpper();
-                    stf.FileName = newFileName;
-                    string newFilePath = getFilePath(stf.FileName);
-                    stf.FilePath = newFilePath;
+                    fileCreation(stf);
                     file.SaveAs(stf.FilePath);
                     stf.ImageBMP = new Bitmap(stf.FilePath);
-                    //TempData["stf"] = stf;
+
                     //Encode message and save img to exports
                     stf.InsertMessage();
                     string path = Path.Combine(Server.MapPath("~/Exports"), stf.FileName + ".png");
@@ -83,6 +80,17 @@ namespace DataCordonBleu_Framework.Controllers {
                 ViewBag.Message = "File uploaded failed";
                 return RedirectToAction("Index");
             }
+        }
+
+        /// <summary>
+        /// Creates the File name and path. Stores vaules in the provided Stuffer
+        /// </summary>
+        /// <param name="stf">Stuffer object containing user input</param>
+        public void fileCreation(Stuffer stf) {
+            string newFileName = Hasher.GetRandKey().ToUpper();
+            stf.FileName = newFileName;
+            string newFilePath = getFilePath(stf.FileName);
+            stf.FilePath = newFilePath;
         }
 
         #region Old Code

@@ -12,20 +12,16 @@ namespace DataCordonBleu_Framework.Controllers {
     public class DecodeController : BaseController {
 
         public ActionResult Index() {
-            Stuffer unstf = (Stuffer)TempData["unstf"];
-            if (unstf != null) {
-                unstf.ExtractMessage();
-            }
-            return View(unstf);
+            return View();
         }
 
         public ActionResult FromFile(HttpPostedFileBase file, Stuffer unstf) {
             try {
                 if (file.ContentLength > 0) {
+                    //Converts file to image
                     Image temp = Image.FromStream(file.InputStream);
                     unstf.ImageBMP = new Bitmap(temp);
                     unstf.ExtractMessage();
-                    //TempData["unstf"] = unstf;
                 }
                 ViewBag.Message = "File uploaded successful";
                 return View("Success", unstf);

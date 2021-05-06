@@ -24,6 +24,12 @@ namespace DataCordonBleu_Framework.Models {
         #region Constructors
         public Stuffer() { }
 
+        /// <summary>
+        /// Overloaded constructor
+        /// </summary>
+        /// <param name="msg">Message to be encoded</param>
+        /// <param name="bmp">Bitmap Image to use for encoding</param>
+        /// <param name="blockSize">How many bits of each color value to use. Defualt is 2.</param>
         public Stuffer(string msg, Bitmap bmp, int blockSize) {
             Message = msg;
             ImageBMP = bmp;
@@ -32,6 +38,9 @@ namespace DataCordonBleu_Framework.Models {
         #endregion
 
         #region Properities
+        /// <summary>
+        /// Text to encode or text decoded from image
+        /// </summary>
         [Display(Name = "Message")]
         [Required]
         public string Message {
@@ -47,6 +56,9 @@ namespace DataCordonBleu_Framework.Models {
             set { _Message = value; }
         }
 
+        /// <summary>
+        /// Password used to verify encoding and decoding
+        /// </summary>
         [Display(Name = "Password to encode")]
         [Required]
         public string Password {
@@ -54,26 +66,41 @@ namespace DataCordonBleu_Framework.Models {
             set { _Password = value; }
         }
 
+        /// <summary>
+        /// File name of the image
+        /// </summary>
         public string FileName {
             get { return _FileName; }
             set { _FileName = value; }
         }
 
+        /// <summary>
+        /// File path of the image
+        /// </summary>
         public string FilePath {
             get { return _FilePath; }
             set { _FilePath = value; }
         }
 
+        /// <summary>
+        /// How many bits of each color value to use. Defualt is 2.
+        /// </summary>
         public int BlockSize {
             get { return _BlockSize; }
             set { _BlockSize = value; }
         }
 
+        /// <summary>
+        /// Bitmap image used for encoding and encoding
+        /// </summary>
         public Bitmap ImageBMP {
             get { return _ImageBMP; }
             set { _ImageBMP = value; }
         }
 
+        /// <summary>
+        /// Jagged Array containing the numerical equivalent of Message
+        /// </summary>
         public int[][] MessageArray {
             get {
                 if (_MessageArray == null) {
@@ -148,6 +175,11 @@ namespace DataCordonBleu_Framework.Models {
         #endregion
 
         #region Private Methods
+        /// <summary>
+        /// Converts a two dimensional array of integers to a one dimensional array
+        /// </summary>
+        /// <param name="twoD">array to convert</param>
+        /// <returns>one dimensional array of integers</returns>
         private int[] ToOneDemArray(int[][] twoD) {
             List<int> retList = new List<int>();
             for (int ndx = 0; ndx < MessageArray.Length; ndx++) {
@@ -159,6 +191,11 @@ namespace DataCordonBleu_Framework.Models {
             return retList.ToArray();
         }
 
+        /// <summary>
+        /// Converts a one dimensional array of integers to a two dimensional array
+        /// </summary>
+        /// <param name="oneD">array to convert</param>
+        /// <returns>two dimensional array of integers</returns>
         private int[][] ToTwoDemArray(int[] oneD) {
             List<int[]> retList = new List<int[]>();
             for (int ndx = 0; ndx < oneD.Length; ndx += 4) {
@@ -171,7 +208,11 @@ namespace DataCordonBleu_Framework.Models {
             }
             return retList.ToArray();
         }
-
+        /// <summary>
+        /// Creates space in each color value (R,G,B) based upon BlockSize
+        /// </summary>
+        /// <param name="pixel">Individual pixel</param>
+        /// <returns>Pixel with altered color to allow for inserting space</returns>
         private Color MakeSpaceInPixel(Color pixel) {
             int red = BitBlock.MakeStorageSpace(pixel.R, BlockSize);
             int green = BitBlock.MakeStorageSpace(pixel.G, BlockSize);
@@ -179,11 +220,10 @@ namespace DataCordonBleu_Framework.Models {
             Color newColor = Color.FromArgb(red, green, blue);
             return newColor;
         }
-
-        //private Color EncodePixel() { }
         #endregion
 
         #region Old Stuff
+        [Obsolete]
         private int[] GetArrayOfColors() {
             List<Color> pixelList = new List<Color>();
             List<int> colorList = new List<int>();
@@ -201,6 +241,7 @@ namespace DataCordonBleu_Framework.Models {
             return colorList.ToArray();
         }
 
+        [Obsolete]
         private List<Color> ArrayOfColorsToPixels(int[] arr) {
             List<Color> pixelList = new List<Color>();
             for (int ndx = 0; ndx < arr.Length; ndx += 3) {

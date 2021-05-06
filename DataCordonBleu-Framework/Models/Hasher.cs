@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
-//using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace DataCordonBleu_Framework.Models {
+    //Reference: Jon Holmes's Code
     public static class Hasher {
 
         ////https://monkelite.com/how-to-hash-password-in-asp-net-core/
@@ -15,6 +15,10 @@ namespace DataCordonBleu_Framework.Models {
         //    return Convert.ToBase64String(hash);
         //}
 
+        /// <summary>
+        /// Randomly genterates salt
+        /// </summary>
+        /// <returns>String containing the salt</returns>
         public static string GetSalt() {
             byte[] randonBytes = new byte[128 / 8];
             RandomNumberGenerator rng = RandomNumberGenerator.Create();
@@ -22,6 +26,10 @@ namespace DataCordonBleu_Framework.Models {
             return Convert.ToBase64String(randonBytes);
         }
 
+        /// <summary>
+        /// Generates a key of random characters
+        /// </summary>
+        /// <returns>String of random characters</returns>
         public static string GetRandKey() {
             string newKey;
             do {
