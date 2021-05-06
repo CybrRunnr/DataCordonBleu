@@ -1,0 +1,9 @@
+﻿@model DataCordonBleu_Framework.Models.Stuffer
+@{
+    ViewBag.Title = "Success";
+    string imgPath = "/Exports/" + Model.FileName + ".png";
+}
+
+<h2>Success</h2>
+<img src="@imgPath" />
+<a href="@imgPath" >Download Image</a>

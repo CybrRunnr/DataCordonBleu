@@ -19,25 +19,30 @@ namespace DataCordonBleu_Framework.Controllers {
         //}
 
         public ActionResult Index() {
-            Stuffer stf = (Stuffer)TempData["stf"];
-            if (stf != null) {
-                stf.InsertMessage();
-
-                //Stuffer testing = new Stuffer();
-                //testing.ImageBMP = stf.ImageBMP;
-
-                //testing.ExtractMessage();
-
-                string path = Path.Combine(Server.MapPath("~/Exports"), stf.FileName + ".png");
-                try {
-                    stf.ImageBMP.Save(path, ImageFormat.Png);
-                } catch (Exception) {
-
-                    throw;
-                }
-            }
-            return View(stf);
+            return View();
         }
+
+        //[HttpPost]
+        //public ActionResult Index(int x) {
+        //    Stuffer stf = (Stuffer)TempData["stf"];
+        //    if (stf != null) {
+        //        stf.InsertMessage();
+
+        //        //Stuffer testing = new Stuffer();
+        //        //testing.ImageBMP = stf.ImageBMP;
+
+        //        //testing.ExtractMessage();
+
+        //        string path = Path.Combine(Server.MapPath("~/Exports"), stf.FileName + ".png");
+        //        try {
+        //            stf.ImageBMP.Save(path, ImageFormat.Png);
+        //        } catch (Exception) {
+
+        //            throw;
+        //        }
+        //    }
+        //    return View("Success",stf);
+        //}
 
         //[HttpPost]
         //public ActionResult Index(Stuffer stf) {
@@ -62,6 +67,7 @@ namespace DataCordonBleu_Framework.Controllers {
         public ActionResult FromFile(HttpPostedFileBase file, Stuffer stf) {
             try {
                 if (file.ContentLength > 0) {
+                    //Save the original img to uploads
                     string newFileName = Hasher.GetRandKey().ToUpper();
                     stf.FileName = newFileName;
                     // Path.GetExtension: https://docs.microsoft.com/en-us/dotnet/api/system.io.path.getextension?view=net-5.0
@@ -71,9 +77,13 @@ namespace DataCordonBleu_Framework.Controllers {
                     file.SaveAs(stf.FilePath);
                     stf.ImageBMP = new Bitmap(stf.FilePath);
                     TempData["stf"] = stf;
+                    //Encode message and save img to exports
+                    stf.InsertMessage();
+                    string path = Path.Combine(Server.MapPath("~/Exports"), stf.FileName + ".png");
+                    stf.ImageBMP.Save(path, ImageFormat.Png);
                 }
                 ViewBag.Message = "File uploaded successful";
-                return RedirectToAction("Index");
+                return View("Success",stf);
             } catch {
                 ViewBag.Message = "File uploaded failed";
                 return RedirectToAction("Index");
