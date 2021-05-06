@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using DataCordonBleu_Framework.Models;
 
 namespace DataCordonBleu_Framework.Controllers {
-    public class EncodeController : Controller {
+    public class EncodeController : BaseController {
 
         public ActionResult Index() {
             return View();
@@ -63,7 +63,7 @@ namespace DataCordonBleu_Framework.Controllers {
         //Source: https://www.c-sharpcorner.com/article/upload-files-in-asp-net-mvc-5/
         public ActionResult FromFile(HttpPostedFileBase file, Stuffer stf) {
             try {
-                if (file.ContentLength > 0) {
+                if (file.ContentLength > 0 && file != null) {
                     //Save the original img to uploads
                     string newFileName = Hasher.GetRandKey().ToUpper();
                     stf.FileName = newFileName;
@@ -103,14 +103,5 @@ namespace DataCordonBleu_Framework.Controllers {
         //    return RedirectToAction("Index");
         //}
         #endregion
-
-        private string getFilePath(string fileName) {
-            fileName = fileName.ToUpper();
-            fileName = fileName + ".png";
-            string folder = Server.MapPath("~/Uploads"); // = (_HostingEnvironment.ContentRootPath + @"\Data");
-            string newFilePath = Path.Combine(folder, fileName);
-            //string newFilePath = dataFolder + @"\" + fileName + extension;
-            return newFilePath;
-        }
     }
 }

@@ -9,7 +9,7 @@ using System.IO;
 using DataCordonBleu_Framework.Models;
 
 namespace DataCordonBleu_Framework.Controllers {
-    public class DecodeController : Controller {
+    public class DecodeController : BaseController {
 
         public ActionResult Index() {
             Stuffer unstf = (Stuffer)TempData["unstf"];
@@ -33,15 +33,6 @@ namespace DataCordonBleu_Framework.Controllers {
                 ViewBag.Message = "File uploaded failed";
                 return RedirectToAction("Index");
             }
-        }
-
-        private string getFilePath(string fileName) {
-            fileName = fileName.ToUpper();
-            fileName = fileName + ".png";
-            string folder = Server.MapPath("~/Uploads");
-            string newFilePath = Path.Combine(folder, fileName);
-            //string newFilePath = dataFolder + @"\" + fileName + extension;
-            return newFilePath;
         }
     }
 }
