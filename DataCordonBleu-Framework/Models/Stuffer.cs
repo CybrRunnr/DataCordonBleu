@@ -198,8 +198,11 @@ namespace DataCordonBleu_Framework.Models {
         /// <returns>two dimensional array of integers</returns>
         private int[][] ToTwoDemArray(int[] oneD) {
             List<int[]> retList = new List<int[]>();
-            for (int ndx = 0; ndx < oneD.Length; ndx += 4) {
-                IEnumerable<int> tempList = oneD.Skip(ndx).Take(4);
+            Double arrSize = 16 / BlockSize;
+            arrSize = Math.Ceiling(arrSize);
+            int take = (int)arrSize;
+            for (int ndx = 0; ndx < oneD.Length; ndx += take) {
+                IEnumerable<int> tempList = oneD.Skip(ndx).Take(take);
                 int[] tempArr = tempList.ToArray();
                 if (tempArr.Sum() == 0) {
                     return retList.ToArray();

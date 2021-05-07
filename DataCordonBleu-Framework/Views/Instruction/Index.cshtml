@@ -1,10 +1,72 @@
 ﻿
 @{
-    ViewData["Title"] = "Instruction";
+    ViewData["Title"] = "Instructions";
 }
 
 <h1>@ViewData["Title"]</h1>
+
 <div>
-    <p>Intructions will go here.</p>
+    <div>
+        <h2>Encoding Instructions</h2>
+        <ol>
+            <li>Find an image you would like to encode a message into and save it to your computer if it is not already. It can be a .jgp, .jpeg, or .png.</li>
+            <li>Go to the @Html.ActionLink("Encoding Page", "Index", "Encode").</li>
+            <li>Click on 'Browse...' and select the image.</li>
+            <li>Type or paste the message you would like to encode into the image.</li>
+            <li>Type a number for the Block Size. See tips for recommendations about Block Size.</li>
+            <li>Make note of the Block Size you chose; you can not decode your message without it.</li>
+            <li>Click 'Encode' to insert your message into your image. Please be patient, the large the image and message are the longer the process take to complete.</li>
+            <li>To save your encoded image click "Download Image".</li>
+            <li>Right click on the image and select 'Save Image As...'</li>
+            <li>Finally, Follow the system promotes.</li>
+        </ol>
+    </div>
+    <div>
+        <h2>Decoding Instructions</h2>
+        <span>You will need an image that already has a message encoded into it by Data CordonBleu.</span>
+        <ol>
+            <li>Navigate  to the @Html.ActionLink("Decoding Page", "Index", "Decode").</li>
+            <li>Click on 'Browse...' and select the encoded image.</li>
+            <li>
+                Enter the Block Size that was used to encode the image.
+                <ul>
+                    <li>
+                        <b>Warning:</b> Using a block size different than the one used to encode
+                        the image will result in the message being decoded incorrectly.
+                    </li>
+                </ul>
+            </li>
+            <li>Click 'Decode' to extract your message from your image. Please be patient, the large the image and message are the longer the process take to complete.</li>
+        </ol>
+    </div>
+    <div>
+        <h2>Tips</h2>
+        <h3>Block Size</h3>
+        <ul>
+            <li>
+                Block Size determines  how much information can be stored in each color value. For example, if the block size is set to 2, then 2 bits of information will be stored in
+                each color value (i.e., in each pixel 2 bits will be stored in red, 2 bits in green, and 2 bits in blue). If the Block Size is 3, then 3 bits of information will be stored in
+                each color value, etc.
+            </li>
+            <li>The higher the Block Size (e.g., 6) is the more information can be stored in each pixel.</li>
+            <li>The smaller the Block Size (e.g., 2) is the less color distortion occurs.</li>
+            <li>
+                <b>Remember:</b> The same Block Size that is used to encode a message is needed to decode the message.
+                <ul>
+                    <li>Using differing Block Sizes will cause the message to be decoded incorrectly.</li>
+                </ul>
+            </li>
+        </ul>
+        <h3>Image Size</h3>
+        <ul>
+            <li>Only so much information can be stored in an image without causing color distortion visible to the naked eye.</li>
+            <li>
+                To prevent creating an image with noticeable differences, choose a larger image.
+                <ul>
+                    <li>Please be patient when encoding large images. Images with a resolution of 4k and higher may take more than 30 seconds to encode and decode.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </div>
 

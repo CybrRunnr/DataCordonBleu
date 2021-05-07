@@ -72,6 +72,8 @@ namespace DataCordonBleu_Framework.Models {
         private static int[] IntToBitBlocks(int num, int blockSize) {
             List<int> numList = new List<int>();
             int remainder;
+            Double arrSize = 16 / blockSize;
+            arrSize = Math.Ceiling(arrSize);
             do {
                 int mod = GetMod(num, blockSize);
                 remainder = num - mod;
@@ -79,7 +81,7 @@ namespace DataCordonBleu_Framework.Models {
                 num = RightShift(num, blockSize);
             } while (remainder != 0);
             numList.Reverse();
-            while (numList.Count < 4) {
+            while (numList.Count < arrSize) {
                 numList.Insert(0, 0);
             }
             return numList.ToArray();

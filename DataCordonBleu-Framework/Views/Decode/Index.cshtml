@@ -11,10 +11,12 @@
         @*<input type="file" id="fileImport" name="file" />*@
         <div>
             <span><b>Important:</b> The Block Size used to decode the message must be the same as the Block Size used to encode it.</span>
-            @Html.LabelFor(model => model.BlockSize)
             <div>
-                @Html.TextBoxFor(model => model.BlockSize)
-                @Html.ValidationMessageFor(model => model.BlockSize)
+                @Html.LabelFor(model => model.BlockSize)
+                <div>
+                    @Html.TextBoxFor(model => model.BlockSize)
+                    @Html.ValidationMessageFor(model => model.BlockSize)
+                </div>
             </div>
         </div>
         <button type="submit">Decode</button>
@@ -23,15 +25,15 @@
 </div>
 
 
-@if (Model != null) {
+@*@if (Model != null) {
     <span>The decoded mesage is:</span>
     <p>@Model.Message</p>
-}
+}*@
 
 @*<h3>Testing stuff to be removed</h3>
 
-@if (Model != null) {
-    <span>@Model.Password</span>
-} else {
-    <span>The Model is null.</span>
-}*@
+    @if (Model != null) {
+        <span>@Model.Password</span>
+    } else {
+        <span>The Model is null.</span>
+    }*@

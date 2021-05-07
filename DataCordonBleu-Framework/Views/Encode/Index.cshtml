@@ -9,6 +9,7 @@
     <span><b>Select an image to encode a message into</b></span>
     @using (Html.BeginForm("FromFile", "Encode", FormMethod.Post, new { enctype = "multipart/form-data" })) {
         @Html.TextBox("file", "", new { type = "file" })
+        <span>The encoded image will be returned as a PNG</span>
         @*<input type="file" id="fileImport" name="file" />*@
         @*<input type="submit" value="Upload" />*@
         @*}
@@ -38,7 +39,7 @@
                     @Html.ValidationMessageFor(model => model.Password)
                 </div>
             </div>*@
-        <button type="submit">Submit</button>
+        <button type="submit">Encode</button>
     }
 </div>
 
